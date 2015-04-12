@@ -5,7 +5,7 @@ require_relative 'lib/result_page'
 require_relative 'lib/toilet_details'
 
 
-class LimitedAccessiblity < Mechanize
+class ToiletsForTheDisabled < Mechanize
   def process
     agent = self
     get('http://frankfurt-handicap.de/stadtfuehrer.html?suche_action=los&bar_search=9') do |page|
@@ -19,4 +19,4 @@ class LimitedAccessiblity < Mechanize
   end
 end
 
-LimitedAccessiblity.new.process
+ToiletsForTheDisabled.new.process
