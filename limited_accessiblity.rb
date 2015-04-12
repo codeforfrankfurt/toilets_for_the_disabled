@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'mechanize'
 
-require_relative 'result_page'
-require_relative 'toilet_details'
+require_relative 'lib/result_page'
+require_relative 'lib/toilet_details'
 
 
 class LimitedAccessiblity < Mechanize
