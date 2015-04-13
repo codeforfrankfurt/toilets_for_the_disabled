@@ -6,8 +6,9 @@ class ToiletDetails
   }
 
 
-  def initialize(name, node)
+  def initialize(name, address, node)
     @name = name
+    @address = address
     @attributes = {}
 
     lists = node.search('dl')
@@ -31,6 +32,6 @@ class ToiletDetails
 
 
   def to_hash
-    {"name" => @name}.merge(@attributes)
+    {"name" => @name, "address" => @address}.merge(@attributes)
   end
 end
