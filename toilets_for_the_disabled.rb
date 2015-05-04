@@ -1,8 +1,11 @@
-require 'rubygems'
+require 'bundler/setup'
+
+ENV['RACK_ENV'] ||= 'development'
+Bundler.setup(:default, ENV['RACK_ENV'])
+
 require 'mechanize'
 
 require_relative 'lib/result_page'
-require_relative 'lib/toilet_details'
 
 
 class ToiletsForTheDisabled < Mechanize

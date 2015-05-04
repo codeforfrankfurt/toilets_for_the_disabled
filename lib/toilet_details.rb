@@ -30,8 +30,11 @@ class ToiletDetails
     end
   end
 
+  def basic_attributes
+    {"name" => @name, "address" => @address}
+  end
 
   def to_hash
-    {"name" => @name, "address" => @address}.merge(@attributes)
+    basic_attributes.merge(@attributes)
   end
 end
