@@ -9,7 +9,7 @@ The plan is to put that data into a dedicated mobile and web app and on openstre
 Next/open steps:
 * Pushing the data to OSM via their API
 * App for spotting
-* Web App showing the spotted POIs
+* Web App showing the spotted POIs (pin/location data is specified in [GeoJSON](http://geojson.org/) standard)
 * Web API  for accepting POIs spotted by the API
 
 # Install
