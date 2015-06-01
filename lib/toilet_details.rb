@@ -31,7 +31,7 @@ class ToiletDetails
   end
 
   def basic_attributes
-    {"name" => @name, "address" => @address}
+    {"name" => @name, "address" => @address.join(','), "street" => @address.first, "place" => @address.last}
   end
 
   def to_hash
