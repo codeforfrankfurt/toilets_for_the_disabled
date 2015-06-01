@@ -33,18 +33,16 @@ def spot(doc)
       "coordinates" => [doc['location'].last, doc['location'].first]
     },
     "type" => "Feature",
-    "properties" => {
-      "popupContent" => popup_content(doc)
-    },
+    "properties" => geojson_properties(doc),
     "id" => doc['_id']
   }
 end
 
-def popup_content(doc)
-  except = ['_id', 'name', 'street', 'place']
+def geojson_properties(doc)
+  except = ['_id', 'location', 'address']
   result = doc.dup
   except.each do |field|
     result.delete field
   end
-  doc['name'] << "\n\n" << result.inspect
+  result
 end

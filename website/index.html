@@ -31,18 +31,24 @@
 
 
 			function onEachFeature(feature, layer) {
-				var popupContent = "<p>I started out as a GeoJSON " +
-					feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+				var properties = jQuery.extend({}, feature.properties);
+				var	popupContent = "<h3>"+properties.name+"</h3>";
+				popupContent += "<h4>"+properties.street+"</h4>";
+				popupContent += properties.place;
+				delete properties.name;
+				delete properties.street;
+				delete properties.place;
 
-				if (feature.properties && feature.properties.popupContent) {
-					popupContent += feature.properties.popupContent;
+				popupContent += "<dl>";
+				for(var property in properties) {
+					var value = properties[property];
+					popupContent += "<dt>"+property+"</dt><dd>"+value+"</dd>";
 				}
-
+				popupContent += '</dl>';
 				layer.bindPopup(popupContent);
 			}
 
 			$.getJSON('spots', function( data ) {
-				console.log(data);
 				L.geoJson([data], {
 
 					style: function (feature) {
