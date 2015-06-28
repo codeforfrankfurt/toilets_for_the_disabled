@@ -33,6 +33,7 @@ get '/spots' do
 end
 
 def spot_to_feature(doc)
+  return nil unless doc['location']
   {
     "geometry" => {
       "type" => "Point",
