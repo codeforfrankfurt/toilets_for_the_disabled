@@ -20,12 +20,19 @@ class ResultPage
           name = addressblock.at('dl:first dd').text.strip
           address = addressblock.at('dl:nth-child(3) dd').xpath('text()').map(&:text)
 
-          h3 = detail_page.at('h3.ergebnis span')
-          next unless h3.text == "Toilette" # if there are no toilet details, we're not interested
+          special_sections = detail_page.search('h3.ergebnis span')
 
-          div = h3.ancestors('div').first
+          # if there are no toilet details, we're not interested (yet)
+          toilet_section = special_sections.find {|n| n.text == "Toilette"}
+          unless toilet_section
+            puts "skipping #{text}"
+            puts "special sections: #{special_sections.xpath('text()').map(&:text)}"
+            next
+          end
 
-          toilet_details = ToiletDetails.new(name, address, div)
+          parent_node = toilet_section.ancestors('div').first
+
+          toilet_details = ToiletDetails.new(name, address, parent_node)
 
           puts toilet_details.to_hash.map { |k, v| "#{k}: #{v}" }
 
