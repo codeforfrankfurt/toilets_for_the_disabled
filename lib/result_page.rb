@@ -39,10 +39,16 @@ class ResultPage
       puts
     end
 
-    @page = @agent.click(@page.link_with(href: /stadtfuehrer.html\?.*suche_dir=2/))
+    @page = @agent.click(next_results_link)
   end
 
   def has_next?
-    !@page.link_with(href: /stadtfuehrer.html\?.*suche_dir=2/).nil?
+    !next_results_link.nil?
   end
+
+  protected
+
+    def next_results_link
+      @page.link_with(href: /stadtfuehrer.html\?.*suche_dir=2.*(?<!\&L=\d)\Z/)
+    end
 end
