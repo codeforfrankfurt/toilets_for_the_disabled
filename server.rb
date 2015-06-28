@@ -24,14 +24,15 @@ get '/spots' do
 
   docs = @collection.find.to_a
   docs.each do |doc|
-    json_body["features"] << spot(doc)
+    spot = spot_to_feature(doc)
+    json_body["features"] << spot if spot
   end
 
   content_type :json
   json_body.to_json
 end
 
-def spot(doc)
+def spot_to_feature(doc)
   {
     "geometry" => {
       "type" => "Point",
