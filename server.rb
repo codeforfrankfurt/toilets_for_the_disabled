@@ -1,6 +1,11 @@
+require 'bundler/setup'
+
+ENV['RACK_ENV'] ||= 'development'
+Bundler.setup(:default, ENV['RACK_ENV'])
+
 require 'sinatra'
-require "json"
 require 'mongo'
+require 'json'
 
 set :public_folder, 'website'
 
