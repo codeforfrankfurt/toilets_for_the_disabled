@@ -11,7 +11,7 @@ class ToiletDocs
 
   def save
     query = @toilet_details.basic_attributes
-    puts @collection.update(query, @toilet_details.to_hash, {upsert: true})
+    puts @collection.update(query, {"$setOnInsert" => @toilet_details.to_hash}, {upsert: true})
   end
 
 end
