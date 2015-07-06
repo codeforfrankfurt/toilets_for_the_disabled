@@ -2,15 +2,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Leaflet GeoJSON Example</title>
+	<title>Toilets for the disabled</title>
 	<meta charset="utf-8" />
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 	<link rel="stylesheet" href="scripts/leaflet.css" />
+	<link rel="stylesheet" href="scripts/style.css" />
 </head>
-<body>39.74739, -105
-	<div id="map" style="width: 600px; height: 400px"></div>
+<body>
+	<div id="map" />
 
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="sample-geojson.js" type="text/javascript"></script>
@@ -31,18 +32,24 @@
 
 
 			function onEachFeature(feature, layer) {
-				var popupContent = "<p>I started out as a GeoJSON " +
-					feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
+				var properties = jQuery.extend({}, feature.properties);
+				var	popupContent = "<h3>"+properties.name+"</h3>";
+				popupContent += "<h4>"+properties.street+"</h4>";
+				popupContent += properties.place;
+				delete properties.name;
+				delete properties.street;
+				delete properties.place;
 
-				if (feature.properties && feature.properties.popupContent) {
-					popupContent += feature.properties.popupContent;
+				popupContent += "<dl>";
+				for(var property in properties) {
+					var value = properties[property];
+					popupContent += "<dt>"+property+"</dt><dd>"+value+"</dd>";
 				}
-
+				popupContent += '</dl>';
 				layer.bindPopup(popupContent);
 			}
 
 			$.getJSON('spots', function( data ) {
-				console.log(data);
 				L.geoJson([data], {
 
 					style: function (feature) {

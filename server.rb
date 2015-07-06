@@ -1,6 +1,11 @@
+require 'bundler/setup'
+
+ENV['RACK_ENV'] ||= 'development'
+Bundler.setup(:default, ENV['RACK_ENV'])
+
 require 'sinatra'
-require "json"
 require 'mongo'
+require 'json'
 
 set :public_folder, 'website'
 
@@ -19,32 +24,32 @@ get '/spots' do
 
   docs = @collection.find.to_a
   docs.each do |doc|
-    json_body["features"] << spot(doc)
+    spot = spot_to_feature(doc)
+    json_body["features"] << spot if spot
   end
 
   content_type :json
   json_body.to_json
 end
 
-def spot(doc)
+def spot_to_feature(doc)
+  return nil unless doc['location']
   {
     "geometry" => {
       "type" => "Point",
       "coordinates" => [doc['location']['lat'], doc['location']['lng']]
     },
     "type" => "Feature",
-    "properties" => {
-      "popupContent" => popup_content(doc)
-    },
+    "properties" => geojson_properties(doc),
     "id" => doc['_id']
   }
 end
 
-def popup_content(doc)
-  except = ['_id', 'name', 'street', 'place']
+def geojson_properties(doc)
+  except = ['_id', 'location', 'address']
   result = doc.dup
   except.each do |field|
     result.delete field
   end
-  doc['name'] << "\n\n" << result.inspect
+  result
 end
