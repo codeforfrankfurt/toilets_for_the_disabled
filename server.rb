@@ -30,7 +30,7 @@ def spot(doc)
   {
     "geometry" => {
       "type" => "Point",
-      "coordinates" => [doc['location'].last, doc['location'].first]
+      "coordinates" => [doc['location']['lat'], doc['location']['lng']]
     },
     "type" => "Feature",
     "properties" => {

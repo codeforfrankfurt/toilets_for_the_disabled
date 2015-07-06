@@ -34,6 +34,10 @@ class ToiletDetails
     {"name" => @name, "address" => @address.join(','), "street" => @address.first, "place" => @address.last}
   end
 
+  def query
+    {"name" => @name, "place" => @address.last}
+  end
+
   def to_hash
     basic_attributes.merge(@attributes)
   end

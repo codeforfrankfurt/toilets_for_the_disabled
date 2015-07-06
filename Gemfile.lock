@@ -6,6 +6,7 @@ GEM
       bson (~> 1.12.1)
     domain_name (0.5.23)
       unf (>= 0.0.5, < 1.0.0)
+    geocoder (1.2.9)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
     mechanize (2.7.3)
@@ -44,6 +45,7 @@ PLATFORMS
 
 DEPENDENCIES
   bson_ext
+  geocoder
   mechanize
   mongo (< 2.0.0)
   sinatra

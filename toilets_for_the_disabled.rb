@@ -22,4 +22,5 @@ class ToiletsForTheDisabled < Mechanize
   end
 end
 
+Geocoder.configure(:mapquest => {:open => true})
 ToiletsForTheDisabled.new.process
