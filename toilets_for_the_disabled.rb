@@ -4,7 +4,7 @@ ENV['RACK_ENV'] ||= 'development'
 Bundler.setup(:default, ENV['RACK_ENV'])
 
 require 'mechanize'
-
+require 'geocoder'
 require_relative 'lib/result_page'
 
 
