@@ -22,5 +22,11 @@ class ToiletsForTheDisabled < Mechanize
   end
 end
 
-Geocoder.configure(:mapquest => {:open => true})
+Geocoder.configure(
+  :lookup => :mapquest, :mapquest => {:open => true},
+  :language => :de,
+
+  # set default units to kilometers:
+  :units => :km,
+)
 ToiletsForTheDisabled.new.process
