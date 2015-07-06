@@ -23,7 +23,8 @@ class ToiletsForTheDisabled < Mechanize
 end
 
 Geocoder.configure(
-  :lookup => :mapquest, :mapquest => {:open => true},
+  :lookup => :mapquest,
+  :mapquest => {:open => true, :api_key => ENV['mapquest_key']},
   :language => :de,
 
   # set default units to kilometers:

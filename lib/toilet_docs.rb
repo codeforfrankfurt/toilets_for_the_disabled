@@ -22,7 +22,10 @@ class ToiletDocs
       doc = @collection.find_one(query)
       unless doc['location']
         result = Geocoder.coordinates(doc['address'], params: {countrycodes: "de"})
-        @collection.update(query, {"$set" => location_fields(result)})
+        if result
+          puts "geocoded:"
+          puts @collection.update(query, {"$set" => location_fields(result)})
+        end
       end
     end
 
