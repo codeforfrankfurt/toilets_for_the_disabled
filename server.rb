@@ -37,7 +37,7 @@ def spot_to_feature(doc)
   {
     "geometry" => {
       "type" => "Point",
-      "coordinates" => [doc['location']['lat'], doc['location']['lng']]
+      "coordinates" => [doc['location']['lng'], doc['location']['lat']]
     },
     "type" => "Feature",
     "properties" => geojson_properties(doc),
