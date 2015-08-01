@@ -6,6 +6,7 @@ Bundler.setup(:default, ENV['RACK_ENV'])
 require 'mechanize'
 require 'geocoder'
 require_relative 'lib/result_page'
+require_relative 'lib/app_doc'
 
 
 class ToiletsForTheDisabled < Mechanize
@@ -31,3 +32,6 @@ Geocoder.configure(
   :units => :km,
 )
 ToiletsForTheDisabled.new.process
+
+save_count = ENV['SAVE_COUNT'] == "true"
+AppDoc.save_all_fields(save_count: save_count)

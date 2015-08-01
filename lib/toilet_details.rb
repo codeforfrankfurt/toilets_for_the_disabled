@@ -31,7 +31,9 @@ class ToiletDetails
   end
 
   def basic_attributes
-    {"name" => @name, "address" => @address.join(','), "street" => @address.first, "place" => @address.last}
+    result = {"name" => @name, "address" => @address.join(','), "street" => @address.first, "place" => @address.last}
+    fail if result.keys != self.class.basic_keys
+    result
   end
 
   def query
@@ -40,5 +42,9 @@ class ToiletDetails
 
   def to_hash
     basic_attributes.merge(@attributes)
+  end
+
+  def self.basic_keys
+    ["name", "address", "street", "place"]
   end
 end

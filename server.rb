@@ -5,6 +5,7 @@ Bundler.setup(:default, ENV['RACK_ENV'])
 
 require 'sinatra'
 require 'json'
+require_relative 'lib/app_doc'
 require_relative 'lib/toilet_doc'
 
 set :public_folder, 'website'
@@ -16,7 +17,8 @@ end
 get '/spots' do
   json_body = {
     "type" => "FeatureCollection",
-    "features" => []
+    "features" => [],
+    "properties" => AppDoc.get_settings
   }
 
   docs = ToiletDoc.all

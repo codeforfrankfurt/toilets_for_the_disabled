@@ -9,7 +9,6 @@ The plan is to put that data into a dedicated mobile and web app and on openstre
 Next/open steps:
 * Pushing the data to OSM via their API
 * App for spotting
-* Web App showing the spotted POIs (pin/location data is specified in [GeoJSON](http://geojson.org/) standard)
 * Web API  for accepting POIs spotted by the API
 
 # Install
@@ -21,6 +20,16 @@ Next/open steps:
 	# inside the project dir
 	bundle install
 
-Run with
+# Scraper
 
-	ruby toilets_for_the_disabled.rb
+	Run the scraper with
+    
+    	rake
+    	
+    or the following if you want the count for each key
+    
+    	SAVE_COUNT=true rake
+
+# Server
+	
+	ruby server.rb
