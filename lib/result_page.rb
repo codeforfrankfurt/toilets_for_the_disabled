@@ -1,5 +1,5 @@
 require_relative 'toilet_details'
-require_relative 'toilet_docs'
+require_relative 'toilet_doc'
 
 class ResultPage
   def initialize(agent, page)
@@ -36,7 +36,7 @@ class ResultPage
 
           puts toilet_details.to_hash.map { |k, v| "#{k}: #{v}" }
 
-          doc = ToiletDocs.new(toilet_details)
+          doc = ToiletDoc.new(toilet_details)
           doc.save
 
         end

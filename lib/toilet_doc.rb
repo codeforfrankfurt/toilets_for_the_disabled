@@ -1,12 +1,14 @@
-require 'mongo'
+require_relative 'database'
 
-class ToiletDocs
+class ToiletDoc
 
   def initialize(toilet_details)
     @toilet_details = toilet_details
+    @collection = self.class.get_collection
+  end
 
-    client = ::Mongo::MongoClient.new('localhost', 27017)
-    @collection = client.db('toilets_for_the_disabled').collection('toilets')
+  def self.all
+    get_collection.find.to_a
   end
 
   def save
@@ -16,6 +18,10 @@ class ToiletDocs
   end
 
   protected
+
+    def self.get_collection
+      Database.new.collection('toilets')
+    end
   
     def geocode
       query = @toilet_details.query

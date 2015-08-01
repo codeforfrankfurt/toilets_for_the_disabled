@@ -4,8 +4,8 @@ ENV['RACK_ENV'] ||= 'development'
 Bundler.setup(:default, ENV['RACK_ENV'])
 
 require 'sinatra'
-require 'mongo'
 require 'json'
+require_relative 'lib/toilet_doc'
 
 set :public_folder, 'website'
 
@@ -14,15 +14,12 @@ get '/' do
 end
 
 get '/spots' do
-  client = ::Mongo::MongoClient.new('localhost', 27017)
-  @collection = client.db('toilets_for_the_disabled').collection('toilets')
-
   json_body = {
     "type" => "FeatureCollection",
     "features" => []
   }
 
-  docs = @collection.find.to_a
+  docs = ToiletDoc.all
   docs.each do |doc|
     spot = spot_to_feature(doc)
     json_body["features"] << spot if spot
