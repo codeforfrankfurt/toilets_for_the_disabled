@@ -18,7 +18,7 @@ get '/spots' do
   json_body = {
     "type" => "FeatureCollection",
     "features" => [],
-    "properties" => AppDoc.get_settings
+    "properties" => AppDoc.get_settings['filters']
   }
 
   docs = ToiletDoc.all

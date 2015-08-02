@@ -42,11 +42,11 @@ class ToiletDoc
     end
   end
 
-  protected
+  def self.get_collection
+    Database.new.collection('toilets')
+  end
 
-    def self.get_collection
-      Database.new.collection('toilets')
-    end
+  protected
 
     def location_fields(result_object)
       {

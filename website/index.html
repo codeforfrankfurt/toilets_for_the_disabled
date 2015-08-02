@@ -15,6 +15,12 @@
 <body>
 	<div id="map" />
 
+	<div id="filter">
+		<h4>Filter</h4>
+		<form>
+		</form>
+	</div>
+
 	<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="scripts/leaflet.js"></script>
 	<script src="scripts/leaflet.markercluster.js"></script>
@@ -62,6 +68,21 @@
 				var clustered = new L.MarkerClusterGroup();
 				clustered.addLayer(geoJSON);
 				map.addLayer(clustered);
+
+				var filterControl = L.control();
+				filterControl.onAdd = function (map) {
+					this._div = L.DomUtil.create('div', 'filter');
+					var inputs = [];
+					$.each(data.properties, function (name, type) {
+						var html = '<input name="' + name + '" type="' + type + '" />';
+						inputs.push(html);
+					});
+					inputs.push('<input type="submit" />');
+					$('#filter form').append(inputs);
+					this._div.innerHTML = $('#filter').remove().html();
+					return this._div;
+				};
+				//filterControl.addTo(map);
 			});
 		});
 	</script>
