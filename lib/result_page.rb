@@ -32,7 +32,7 @@ class ResultPage
 
           parent_node = toilet_section.ancestors('div').first
 
-          toilet_details = ToiletDetails.new(name, address, parent_node)
+          toilet_details = ToiletDetails.from_scraping(name, address, parent_node)
 
           puts toilet_details.to_hash.map { |k, v| "#{k}: #{v}" }
 
