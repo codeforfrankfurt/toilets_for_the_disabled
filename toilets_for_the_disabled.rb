@@ -4,7 +4,6 @@ ENV['RACK_ENV'] ||= 'development'
 Bundler.setup(:default, ENV['RACK_ENV'])
 
 require 'mechanize'
-require 'geocoder'
 require_relative 'lib/result_page'
 require_relative 'lib/app_doc'
 
@@ -23,14 +22,6 @@ class ToiletsForTheDisabled < Mechanize
   end
 end
 
-Geocoder.configure(
-  :lookup => :mapquest,
-  :mapquest => {:open => true, :api_key => ENV['mapquest_key']},
-  :language => :de,
-
-  # set default units to kilometers:
-  :units => :km,
-)
 ToiletsForTheDisabled.new.process
 
 save_count = ENV['SAVE_COUNT'] == "true"

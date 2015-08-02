@@ -1,4 +1,17 @@
 require_relative 'database'
+require 'geocoder'
+
+Geocoder.configure(
+  :lookup => :mapquest,
+  :mapquest => {:open => true, :api_key => ENV['MAPQUEST_KEY']},
+  :language => :de,
+
+  # geocoding service request timeout, in seconds (default 3):
+  :timeout => 5,
+
+  # set default units to kilometers:
+  :units => :km,
+)
 
 class ToiletDoc
 
@@ -17,22 +30,22 @@ class ToiletDoc
     geocode
   end
 
+  def geocode(doc = nil)
+    query = @toilet_details.query
+    doc = @collection.find_one(query) unless doc
+    unless doc['location']
+      result = Geocoder.search(doc['address'], params: {countrycodes: "de"}).first
+      if result
+        puts "geocoded:"
+        puts @collection.update(query, {"$set" => location_fields(result)})
+      end
+    end
+  end
+
   protected
 
     def self.get_collection
       Database.new.collection('toilets')
-    end
-  
-    def geocode
-      query = @toilet_details.query
-      doc = @collection.find_one(query)
-      unless doc['location']
-        result = Geocoder.search(doc['address'], params: {countrycodes: "de"}).first
-        if result
-          puts "geocoded:"
-          puts @collection.update(query, {"$set" => location_fields(result)})
-        end
-      end
     end
 
     def location_fields(result_object)
@@ -40,7 +53,7 @@ class ToiletDoc
         "location" => {
           "lat" => result_object.latitude,
           "lng" => result_object.longitude,
-          "burrough" => result_object.address_components_of_type(:sublocality),
+          "burrough" => result_object.data['adminArea6'],
           "postal_code" => result_object.postal_code
         }
       }
