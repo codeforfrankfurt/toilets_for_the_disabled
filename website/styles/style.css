@@ -17,3 +17,33 @@ html, body, #map {
   margin: 0 0 5px;
   color: #777;
 }
+
+.leaflet-popup-content {
+  margin: 13px !important;
+}
+
+dl, .leaflet-popup-content {
+  width: 22.5em !important;
+}
+
+.leaflet-popup-content h3, .leaflet-popup-content h4 {
+  margin: 0;
+}
+
+.leaflet-popup-content dt {
+  margin: 0 0 4px 0;
+  float: left;
+  clear: left;
+  width: 180px;
+  text-align: right;
+}
+
+.leaflet-popup-content dd {
+  margin: 0 0 4px 200px;
+}
+
+.leaflet-popup-content dd:afer {
+  content: '';
+  display: block;
+  clear: both;
+}
