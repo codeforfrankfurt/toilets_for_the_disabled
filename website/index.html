@@ -87,23 +87,25 @@
 				clustered.addLayer(geoJSON);
 				map.addLayer(clustered);
 
-				var filterControl = L.control();
-				filterControl.onAdd = function (map) {
-					this._div = L.DomUtil.create('div', 'filter');
-					var inputs = [];
-					$.each(data.properties, function (name, type) {
-						var id = encodeURIComponent(name);
-						var source = $('#filter_template').html();
-						var template = Handlebars.compile(source);
-						var context = {id: id, label: name, name: encodeURI(name), type: type};
-						inputs.push(template(context));
-					});
-					inputs.push('<input type="submit" />');
-					$('#filter form').append(inputs);
-					this._div.innerHTML = $('#filter').remove().html();
-					return this._div;
-				};
-				filterControl.addTo(map);
+				if (window.innerWidth > 640) {
+					var filterControl = L.control();
+					filterControl.onAdd = function (map) {
+						this._div = L.DomUtil.create('div', 'filter');
+						var inputs = [];
+						$.each(data.properties, function (name, type) {
+							var id = encodeURIComponent(name);
+							var source = $('#filter_template').html();
+							var template = Handlebars.compile(source);
+							var context = {id: id, label: name, name: encodeURI(name), type: type};
+							inputs.push(template(context));
+						});
+						inputs.push('<input type="submit" />');
+						$('#filter form').append(inputs);
+						this._div.innerHTML = $('#filter').remove().html();
+						return this._div;
+					};
+					filterControl.addTo(map);
+				}
 			});
 		});
 	</script>
