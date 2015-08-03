@@ -21,7 +21,15 @@
 		</form>
 	</div>
 
+	<script id="filter_template" type="text/x-handlebars-template">
+		<div class="filter">
+			<label for="{{id}}">{{name}}</label>
+			<input id="{{id}}" name="{{name}}" type="{{type}}" />
+		</div>
+	</script>
+
 	<script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/3.0.3/handlebars.min.js"></script>
 	<script src="scripts/leaflet.js"></script>
 	<script src="scripts/leaflet.markercluster.js"></script>
 
@@ -74,15 +82,17 @@
 					this._div = L.DomUtil.create('div', 'filter');
 					var inputs = [];
 					$.each(data.properties, function (name, type) {
-						var html = '<input name="' + name + '" type="' + type + '" />';
-						inputs.push(html);
+						var id = encodeURIComponent(name);
+						var source = $('#filter_template').html();
+						var template = Handlebars.compile(source);
+						inputs.push(template({id: id, name: encodeURI(name), type: type}));
 					});
 					inputs.push('<input type="submit" />');
 					$('#filter form').append(inputs);
 					this._div.innerHTML = $('#filter').remove().html();
 					return this._div;
 				};
-				//filterControl.addTo(map);
+				filterControl.addTo(map);
 			});
 		});
 	</script>
