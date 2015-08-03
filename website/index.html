@@ -23,7 +23,7 @@
 
 	<script id="filter_template" type="text/x-handlebars-template">
 		<div class="filter">
-			<label for="{{id}}">{{name}}</label>
+			<label for="{{id}}">{{label}}</label>
 			<input id="{{id}}" name="{{name}}" type="{{type}}" />
 		</div>
 	</script>
@@ -85,7 +85,8 @@
 						var id = encodeURIComponent(name);
 						var source = $('#filter_template').html();
 						var template = Handlebars.compile(source);
-						inputs.push(template({id: id, name: encodeURI(name), type: type}));
+						var context = {id: id, label: name, name: encodeURI(name), type: type};
+						inputs.push(template(context));
 					});
 					inputs.push('<input type="submit" />');
 					$('#filter form').append(inputs);
