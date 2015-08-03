@@ -4,6 +4,7 @@ ENV['RACK_ENV'] ||= 'development'
 Bundler.setup(:default, ENV['RACK_ENV'])
 
 require 'sinatra'
+require 'sinatra/cross_origin'
 require 'json'
 require_relative 'lib/app_doc'
 require_relative 'lib/toilet_doc'
@@ -26,6 +27,8 @@ get '/spots' do
     spot = spot_to_feature(doc)
     json_body["features"] << spot if spot
   end
+
+  cross_origin :allow_origin => 'http://localhost:4567'
 
   content_type :json
   json_body.to_json

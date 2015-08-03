@@ -63,7 +63,7 @@
 				layer.bindPopup(popupContent);
 			}
 
-			$.getJSON('spots', function( data ) {
+			$.getJSON('//tftd.herokuapp.com/spots', function( data ) {
 				var geoJSON = L.geoJson([data], {
 
 					style: function (feature) {
