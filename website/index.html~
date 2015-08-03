@@ -102,6 +102,7 @@
 				};
 				filterControl.addTo(map);
 			});
+		L.control.locate().addTo(map);
 		});
 	</script>
 </body>
