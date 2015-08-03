@@ -12,7 +12,7 @@ The plan is to put that data into a dedicated mobile and web app and on openstre
 * App for spotting
 * Web API  for accepting POIs spotted by the API
 
-Currently the index.html gets its data from the deployed web app on tftd.herokuapp.com.
+Currently the index.html gets its data from the deployed web app on [tftd.herokuapp.com](https://tftd.herokuapp.com).
 
 The ruby scraper and server however are currently configured to use the local database.
 See `lib/database.rb` to change that. If you want the map to show your local data as well

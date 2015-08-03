@@ -53,6 +53,8 @@
 				id: 'examples.map-20v6611k'
 			}).addTo(map);
 
+			L.control.locate().addTo(map);
+
 			function onEachFeature(feature, layer) {
 				var properties = jQuery.extend({}, feature.properties);
 				var	popupContent = "<h3>"+properties.name+"</h3>";
@@ -103,7 +105,6 @@
 				};
 				filterControl.addTo(map);
 			});
-		L.control.locate().addTo(map);
 		});
 	</script>
 </body>
