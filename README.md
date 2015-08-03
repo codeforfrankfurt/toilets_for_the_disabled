@@ -11,7 +11,14 @@ Next/open steps:
 * App for spotting
 * Web API  for accepting POIs spotted by the API
 
-# Install
+Currently the index.html gets its data from the deployed web app on tftd.herokuapp.com.
+
+The ruby scraper and server however are currently configured to use the local database.
+See `lib/database.rb` to change that. If you want the map to show your local data as well
+set the jsonURL variable in index.html to simply `spots` and it will get the data from
+your local ruby webserver and MongoDB.
+
+# Install (when you want to scrape or serve data locally)
 
     You need Ruby
 

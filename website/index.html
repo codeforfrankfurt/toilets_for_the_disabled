@@ -35,6 +35,7 @@
 
 	<script>
 		$(function() {
+			var jsonURL = '//tftd.herokuapp.com/spots';
 			var map = L.map('map').setView([50.121212, 8.6365638], 13);
 
 			L.tileLayer('//{s}.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
@@ -63,7 +64,7 @@
 				layer.bindPopup(popupContent);
 			}
 
-			$.getJSON('//tftd.herokuapp.com/spots', function( data ) {
+			$.getJSON(jsonURL, function( data ) {
 				var geoJSON = L.geoJson([data], {
 
 					style: function (feature) {
