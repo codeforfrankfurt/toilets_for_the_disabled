@@ -6,7 +6,8 @@ That data is stored into a MongoDB database so make sure you have it installed.
 
 The plan is to put that data into a dedicated mobile and web app and on openstreetmap.org.
 
-Next/open steps:
+# Next/open steps:
+* make the filters actually do something
 * Pushing the data to OSM via their API
 * App for spotting
 * Web API  for accepting POIs spotted by the API
