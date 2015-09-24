@@ -2,9 +2,10 @@
 
 Currently there's a scraper, getting detailed data on over 1770 locations with accessible toilets.
 
-That data is stored into a MongoDB database so make sure you have it installed.
+That data is stored into a MongoDB database so make sure you have it installed if you want to work with the
+data.
 
-The plan is to put that data into a dedicated mobile and web app and on openstreetmap.org.
+The plan is to put that data into a dedicated mobile app and on openstreetmap.org.
 
 # Next/open steps:
 * make the filters actually do something
@@ -12,16 +13,24 @@ The plan is to put that data into a dedicated mobile and web app and on openstre
 * App for spotting
 * Web API  for accepting POIs spotted by the API
 
-Currently the index.html gets its data from the deployed web app on [tftd.herokuapp.com](https://tftd.herokuapp.com).
+Currently the index.html gets its data from the deployed web app on [tftd.herokuapp.com](https://tftd
+.herokuapp.com). This is so you can develop features right away without having to scrape and geocode to get
+started.
 
 The ruby scraper and server however are currently configured to use the local database.
 See `lib/database.rb` to change that. If you want the map to show your local data as well
 set the jsonURL variable in index.html to simply `spots` and it will get the data from
 your local ruby webserver and MongoDB.
 
+# Developing on the web app only
+
+	cd website
+	python -m SimpleHTTPServer 4567 # or any other local HTTP server, but only port 4567 is allowed per CORS
+	# open http://localhost:4567 in your browser 
+
 # Install (when you want to scrape or serve data locally)
 
-    You need Ruby
+You need Ruby
 
 	gem install bundler
 
@@ -30,11 +39,11 @@ your local ruby webserver and MongoDB.
 
 # Scraper
 
-	Run the scraper with
+Run the scraper with
     
     	rake
     	
-    or the following if you want the count for each key
+or the following if you want the count for each key
     
     	SAVE_COUNT=true rake
 
