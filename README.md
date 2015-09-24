@@ -4,10 +4,9 @@ Currently there's a scraper, getting detailed data on over 1770 locations with a
 
 And a deployed web app on [tftd.herokuapp.com](https://tftd.herokuapp.com) that maps the data.
 
-That data is stored into a MongoDB database so make sure you have it installed if you want to work with the
-data.
+It uses a MongoDB database so make sure you have that installed if you want to work with the data.
 
-The plan is to put that data into a dedicated mobile app and on openstreetmap.org.
+The plan is to extend the project with a dedicated mobile app and to push the data into openstreetmap.org.
 
 # Next/open steps:
 * make the filters actually do something
