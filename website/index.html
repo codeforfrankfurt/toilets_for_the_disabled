@@ -56,7 +56,26 @@
 
 			L.control.locate().addTo(map);
 
-			function onEachFeature(feature, layer) {
+			$.getJSON(jsonURL, function( data ) {
+				var geoJSON = L.geoJson([data], {
+
+					style: function (feature) {
+						return feature.properties && feature.properties.style;
+					},
+
+					onEachFeature: _onEachFeature
+				});
+
+				var clustered = new L.MarkerClusterGroup();
+				clustered.addLayer(geoJSON);
+				map.addLayer(clustered);
+
+				if (window.innerWidth > 640) {
+					_addFilterControl(data);
+				}
+			});
+
+			function _onEachFeature(feature, layer) {
 				var properties = jQuery.extend({}, feature.properties);
 				var	popupContent = "<h3>"+properties.name+"</h3>";
 				popupContent += "<h4>"+properties.street+"</h4>";
@@ -74,40 +93,25 @@
 				layer.bindPopup(popupContent);
 			}
 
-			$.getJSON(jsonURL, function( data ) {
-				var geoJSON = L.geoJson([data], {
-
-					style: function (feature) {
-						return feature.properties && feature.properties.style;
-					},
-
-					onEachFeature: onEachFeature
-				});
-
-				var clustered = new L.MarkerClusterGroup();
-				clustered.addLayer(geoJSON);
-				map.addLayer(clustered);
-
-				if (window.innerWidth > 640) {
-					var filterControl = L.control();
-					filterControl.onAdd = function (map) {
-						this._div = L.DomUtil.create('div', 'filter');
-						var inputs = [];
-						$.each(data.properties, function (name, type) {
-							var id = encodeURIComponent(name);
-							var source = $('#filter_template').html();
-							var template = Handlebars.compile(source);
-							var context = {id: id, label: name, name: encodeURI(name), type: type};
-							inputs.push(template(context));
-						});
-						inputs.push('<input type="submit" />');
-						$('#filter form').append(inputs);
-						this._div.innerHTML = $('#filter').remove().html();
-						return this._div;
-					};
-					filterControl.addTo(map);
-				}
-			});
+			function _addFilterControl(data) {
+				var filterControl = L.control();
+				filterControl.onAdd = function (map) {
+					this._div = L.DomUtil.create('div', 'filter');
+					var inputs = [];
+					$.each(data.properties, function (name, type) {
+						var id = encodeURIComponent(name);
+						var source = $('#filter_template').html();
+						var template = Handlebars.compile(source);
+						var context = {id: id, label: name, name: encodeURI(name), type: type};
+						inputs.push(template(context));
+					});
+					inputs.push('<input type="submit" />');
+					$('form', '#filter').append(inputs);
+					this._div.innerHTML = $('#filter').remove().html();
+					return this._div;
+				};
+				filterControl.addTo(map);
+			}
 		});
 	</script>
 </body>
