@@ -22,6 +22,8 @@ See `lib/database.rb` to change that. If you want the map to show your local dat
 set the jsonURL variable in index.html to simply `spots` and it will get the data from
 your local ruby webserver and MongoDB.
 
+Deployment is handled via heroku, send me a pull request if you want me to deploy a feature or bugfix.
+
 # Developing on the web app only
 
 	cd website
