@@ -11,6 +11,7 @@
 	<link rel="stylesheet" href="styles/style.css" />
 	<link rel="stylesheet" href="styles/MarkerCluster.css" />
 	<link rel="stylesheet" href="styles/MarkerCluster.Default.css" />
+	<link rel="stylesheet" href="styles/leaflet-messagebox.css" />
 	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
 	<link rel="stylesheet" href="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.css" />
 	<!--[if lt IE 9]>
@@ -40,6 +41,7 @@
 	<script src="scripts/leaflet.js"></script>
 	<script src="scripts/leaflet.markercluster.js"></script>
 	<script src="//rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js" ></script>
+	<script src="scripts/leaflet-messagebox.js" ></script>
 
 	<script>
 		$(function() {
@@ -53,6 +55,12 @@
 					'Imagery © <a href="http://mapbox.com">Mapbox</a>',
 				id: 'examples.map-zr0njcqy'
 			}).addTo(map);
+
+			var box = L.control.messagebox({ position: 'topleft' }).addTo(map);
+			box.show('Mit obigen Knöpfen können sie zoomen. <button>X</button></br>' +
+				'Alternativ auch per Touch-Gesten oder Mausrad. Durch Heranzoomen werden weitere Toiletten eingezeichnet. ' +
+				'Durch Klicken auf diese werden deren Details gezeigt.</br></br>' +
+				'Der untere Knopf findet ihre Position.');
 
 			L.control.locate().addTo(map);
 
