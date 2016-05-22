@@ -48,12 +48,9 @@
 			var jsonURL = '//tftd.herokuapp.com/spots';
 			var map = L.map('map').setView([50.121212, 8.6365638], 13);
 
-			L.tileLayer('//api.tiles.mapbox.com/v3/{id}/{z}/{x}/{y}.png', {
+			L.tileLayer('http://korona.geog.uni-heidelberg.de/tiles/roads/x={x}&y={y}&z={z}', {
 				maxZoom: 18,
-				attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
-					'<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-					'Imagery © <a href="http://mapbox.com">Mapbox</a>',
-				id: 'examples.map-zr0njcqy'
+				attribution: 'Imagery from <a href="http://giscience.uni-hd.de/">GIScience Research Group @ University of Heidelberg</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' 
 			}).addTo(map);
 
 			var box = L.control.messagebox({ position: 'topleft' }).addTo(map);
